@@ -21,7 +21,15 @@ const personSchema = new mongoose.Schema({
     minLength: 3,
     required: true
   },
-  number: String
+  number: {
+    type: String,
+    minLength: 8,
+    validate: {
+      validator: value => /^\d{2,3}-\d+$/.test(value),
+      message: 'Number must have a 2- or 3-digit prefix, a hyphen, and numeric digits'
+    },
+    required: true
+  }
 })
 
 personSchema.set('toJSON', {
