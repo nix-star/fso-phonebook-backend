@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(express.static('dist'))
 //app.use(morgan('tiny'))
 
-const Person = require("./models/person")
+const Person = require('./models/person')
 
 morgan.token('body', (request) => JSON.stringify(request.body))
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
@@ -43,10 +43,11 @@ app.get('/api/persons', (request, response) => {
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
-  Person.findById(request.params.id).then(note => {
-    response.json(note)
-  })
-  .catch(error => next(error))
+  Person.findById(request.params.id)
+    .then(note => {
+      response.json(note)
+    })
+    .catch(error => next(error))
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
